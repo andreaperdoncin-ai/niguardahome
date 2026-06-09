@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "354190643477",
+    "project_id": "niguardahome",
+    "storage_bucket": "niguardahome.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354190643477:android:03f2d29316e8bdd414991c",
+        "android_client_info": {
+          "package_name": "com.andreaperdoncin.niguardahome"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDc5mndvenJk_xbwxvJKUym8U_HKmZpdpQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
