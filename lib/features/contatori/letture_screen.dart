@@ -108,7 +108,8 @@ class _LettureTabView extends StatelessWidget {
             if (isAcqua) mediaRecente *= 1000.0;
           }
 
-          String unitMedia = isAcqua ? 'L/gg' : 'm³/gg';
+          final String unit = (tipo == 'riscaldamento' || tipo == 'raffrescamento') ? 'MWh' : 'm³';
+          final String unitMedia = isAcqua ? 'L/gg' : '$unit/gg';
 
           return Column(
             children: [
@@ -130,7 +131,7 @@ class _LettureTabView extends StatelessWidget {
                               children: [
                                 Text('Ultima Lettura', style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant, fontSize: 12, fontWeight: FontWeight.bold)),
                                 const SizedBox(height: 8),
-                                Text('${_formatta(ultimaLettura.valore)} m³', style: TextStyle(color: colorValore, fontSize: 22, fontWeight: FontWeight.bold)),
+                                Text('${_formatta(ultimaLettura.valore)} $unit', style: TextStyle(color: colorValore, fontSize: 22, fontWeight: FontWeight.bold)),
                                 const SizedBox(height: 4),
                                 Text(DateFormat('dd/MM/yyyy').format(ultimaLettura.dataLettura), style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant, fontSize: 12)),
                               ],
@@ -143,7 +144,7 @@ class _LettureTabView extends StatelessWidget {
                               children: [
                                 Text('Ultimo Consumo', style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant, fontSize: 12, fontWeight: FontWeight.bold)),
                                 const SizedBox(height: 8),
-                                Text('${_formattaDiff(diffRecente)} m³', style: TextStyle(color: colorValore, fontSize: 22, fontWeight: FontWeight.bold)),
+                                Text('${_formattaDiff(diffRecente)} $unit', style: TextStyle(color: colorValore, fontSize: 22, fontWeight: FontWeight.bold)),
                                 const SizedBox(height: 4),
                                 Text('${_formattaMedia(mediaRecente)} $unitMedia', style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant, fontSize: 12)),
                               ],
@@ -201,7 +202,7 @@ class _LettureTabView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  '${_formatta(letturaCorrente.valore)} m³',
+                                  '${_formatta(letturaCorrente.valore)} $unit',
                                   style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                 ),
                                 const SizedBox(height: 2),
@@ -210,7 +211,7 @@ class _LettureTabView extends StatelessWidget {
                                     children: [
                                       Text('Media: ${_formattaMedia(mediaCard)} $unitMedia', style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant, fontSize: 11)),
                                       const SizedBox(width: 8),
-                                      Text('${_formattaDiff(diffCard)} m³', style: TextStyle(color: colorValore, fontSize: 13, fontWeight: FontWeight.w600)),
+                                      Text('${_formattaDiff(diffCard)} $unit', style: TextStyle(color: colorValore, fontSize: 13, fontWeight: FontWeight.w600)),
                                     ],
                                   )
                                 else

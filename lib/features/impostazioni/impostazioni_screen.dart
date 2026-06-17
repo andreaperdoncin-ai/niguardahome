@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'gestione_categorie_screen.dart';
 import 'offset_contatori_screen.dart';
+import 'configurazione_periodo_screen.dart';
 import 'esporta_csv.dart';
 
 class ImpostazioniScreen extends StatelessWidget {
@@ -14,8 +14,12 @@ class ImpostazioniScreen extends StatelessWidget {
       children: [
         // SEZIONE 1: GESTIONE SPESE E CATEGORIE
         Text(
-            'Spese e Categorie',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary)
+          'Spese e Categorie',
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.primary,
+          ),
         ),
         const SizedBox(height: 8),
         Card(
@@ -38,16 +42,35 @@ class ImpostazioniScreen extends StatelessWidget {
                   );
                 },
               ),
+              const Divider(height: 1, indent: 70),
+              ListTile(
+                leading: const CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  child: Icon(Icons.calendar_month_outlined),
+                ),
+                title: const Text('Configurazione Periodo'),
+                subtitle: const Text('Imposta il mese di inizio dell\'anno condominiale'),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ConfigurazionePeriodoScreen()),
+                  );
+                },
+              ),
             ],
           ),
         ),
+        const SizedBox(height: 16),
 
-        const SizedBox(height: 24),
-
-        // SEZIONE 2: IMPIANTI E CONTATORI
+        // SEZIONE 2: CONTATORI
         Text(
-            'Impianti e Contatori',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary)
+          'Contatori',
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.primary,
+          ),
         ),
         const SizedBox(height: 8),
         Card(
@@ -58,10 +81,10 @@ class ImpostazioniScreen extends StatelessWidget {
               ListTile(
                 leading: const CircleAvatar(
                   backgroundColor: Colors.transparent,
-                  child: Icon(Icons.speed_outlined),
+                  child: Icon(Icons.tune_outlined),
                 ),
-                title: const Text('Valori di Partenza (Offset)'),
-                subtitle: const Text('Imposta le letture iniziali per le case con impianti già avviati'),
+                title: const Text('Offset Contatori'),
+                subtitle: const Text('Imposta i valori di partenza per il calcolo dei consumi'),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () {
                   Navigator.push(
@@ -73,13 +96,16 @@ class ImpostazioniScreen extends StatelessWidget {
             ],
           ),
         ),
-
-        const SizedBox(height: 24),
+        const SizedBox(height: 16),
 
         // SEZIONE 3: DATI E BACKUP
         Text(
-            'Dati App',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary)
+          'Dati e Backup',
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.primary,
+          ),
         ),
         const SizedBox(height: 8),
         Card(
@@ -90,31 +116,43 @@ class ImpostazioniScreen extends StatelessWidget {
               ListTile(
                 leading: const CircleAvatar(
                   backgroundColor: Colors.transparent,
-                  child: Icon(Icons.cloud_download_outlined),
+                  child: Icon(Icons.download_for_offline_outlined),
                 ),
                 title: const Text('Esporta in CSV'),
-                subtitle: const Text('Scarica i dati per visualizzarli su Excel'),
-                onTap: () {
-                  generaECondividiCSV(context);
+                subtitle: const Text('Genera e condividi il file Excel/CSV con tutte le spese'),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () async {
+                  await generaECondividiCSV(context);
                 },
               ),
             ],
           ),
         ),
+        const SizedBox(height: 48),
 
-        // --- AGGIUNTA NUMERO DI VERSIONE QUI ---
-        const SizedBox(height: 48), // Spazio per staccarlo dai menu
-        const Center(
-          child: Text(
-            'Versione 1.2',
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 12,
-              letterSpacing: 1.2, // Un leggero stacco tra le lettere per eleganza
-            ),
+        // VERSIONE DELL'APP (STILE MINIMALISTA IN FONDO)
+        Center(
+          child: Column(
+            children: [
+              Text(
+                'Niguarda Home',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                'Versione 2.0',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.6),
+                ),
+              ),
+            ],
           ),
         ),
-        const SizedBox(height: 24),
       ],
     );
   }
